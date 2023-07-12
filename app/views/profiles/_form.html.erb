@@ -1,0 +1,43 @@
+<%= form_with model: profile do |form| %>
+
+    <div>
+      <%= form.label :username %>
+      <%= form.text_field :username %> <br> <br> 
+    </div>
+
+    <div>
+      <%= form.label :address %>
+      <%= form.text_field :address %> <br> <br> 
+    </div>
+
+    <div>
+      <%= form.label :dob %>
+      <%= form.date_field :dob %> <br> <br> 
+    </div>
+
+    <div>
+      <%= form.label :about %>
+      <%= form.text_area :about %> <br> <br> 
+    </div>
+
+    <div>
+      <%= form.label :bio %>
+      <%= form.text_area :bio %> <br> <br> 
+    </div>
+
+    <div>
+      <%= form.label :image %>
+      <%= form.file_field :image %> <br> <br> 
+    </div>
+
+    <div>
+      <%= form.hidden_field :user_id %>
+    </div>
+    
+    <div>
+      <%= form.submit %>
+    </div>
+<% end %>
+
+<%#= link_to "Back Profile", profile_path %>
+  

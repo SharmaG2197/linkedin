@@ -1,0 +1,29 @@
+<div style = 'margin-left:400px'>
+  <div class="btn btn-outline-info" style='margin-left:-350px'>
+    <%= link_to "Add New post", new_post_path %>
+  </div>
+
+  <div class="card" style="width: 380px;">
+    <div class="card-body">
+      <div id="posts">
+        <% @posts.each do |post| %>
+          <%= render post %>
+            <h6>Post ID :- <%= post.id %> </h6>
+            <h6>Title :- <%= post.title %> </h6>
+            <h6>Description :- <%= post.description %> </h6>
+            <h6>User Id :- <%= post.user_id %> </h5>
+            <p>Like :- <%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+            <p>
+              <button class="btn btn-outline-info" style = 'margin-left:285px'>
+                <%= link_to "View", post %>
+              </button>
+            </p> <hr>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>
+  <div style='margin-left:400px; margin-top:20px'>
+    <%= paginate @posts, theme: 'bootstrap-5', pagination_class: "pagination-sm flex-wrap justify-content-center", nav_class: "d-inline-block" %>
+  </div>

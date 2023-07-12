@@ -1,0 +1,61 @@
+<%= render @post %>
+
+<div>
+  <h5>Post ID :- <%= @post.id %></h5>
+  <h5>Title :- <%= @post.title %></h5>
+  <p>Description :- <%= @post.description %> </p>
+  <p>User ID :- <%= @post.user_id %></p>
+
+  <br>
+
+<%#= ------------------------------ Like & Unlike ------------------------------ %>
+  <p>
+    <%= @post.likes.count %>
+    <%= (@post.likes.count) == 1 ? 'Like' : 'Likes'%>
+  </p>
+  <% pre_like = @post.likes.find { |like| like.user_id == current_user.id} %>
+  <% if pre_like %>
+    <%= button_to 'Unlike', post_like_path(@post, pre_like), method: :delete %>
+  <% else %>
+    <%= button_to 'Like', post_likes_path(@post), method: :post %>
+  <% end %>
+<%#= ------------------------------ End Like & Unlike ------------------------------ %>
+
+<% if @post.user == current_user %>
+<%# byebug %>
+
+  <%= link_to "Edit this post", edit_post_path(@post) %> -|-|-
+  <%= link_to "Back to posts", posts_path %> <br>
+  <%= button_to "Destroy this post", @post, method: :delete %>
+
+<% end %>
+</div>
+
+
+
+
+
+<hr>
+<b>Comments</b> <br>
+  <% @comments&.each do |comment|%>
+    <p> Comment :- <%= comment.comment_text %> </p>
+    <p> Comment ID :- <%= comment.id %> </p>
+    <p> User ID :- <%= comment.user_id %> </p>
+    <p> Post ID :- <%= comment.post_id %> </p>
+  <% end %>
+<hr>
+
+<%#= ------------------------------ Comment ------------------------------ %>
+<h2>Comments</h2>
+  <%= form_with model: [ @post, @post.comments.build ] do |form| %>
+    <p>
+      <%= form.label :comment_text %><br>
+      <%= form.text_field :comment_text %>
+    </p>
+    <p>
+      <%= form.submit %>  
+    </p>
+  <% end %>
+<%#= ------------------------------ End Comment ------------------------------ %>
+
+

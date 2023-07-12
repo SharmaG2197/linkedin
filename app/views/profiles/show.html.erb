@@ -1,0 +1,9 @@
+<p> <b> Username :- </b> <%= @profile.username %> <p>
+<p> <b> Address :- </b> <%= @profile.address %> <p>
+<p> <b> Bio :- </b> <%= @profile.bio %> <p>
+<p> <b> About :- </b> <%= @profile.about %> <p>
+<p> <b> Date of Birth :- </b> <%= @profile.dob %> <p>
+<p> <b> User ID :- </b> <%= @profile.user_id %> <p>
+
+<%= link_to "Edit profile", edit_profile_path(@profile) %> | 
+<%= link_to "Back Profile", profiles_path %>

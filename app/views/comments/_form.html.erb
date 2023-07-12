@@ -1,0 +1,11 @@
+<%= form_with model: [ @post, @post.comments.build ]|form| %>
+   <%= form.label :text, "Text:" %>
+   <%= form.text_area :text %>
+   <%= form.label :user_id, "user id" %>
+   <%= form.text_area :user_id %>
+   <%= form.label :post_id, "post id:" %>
+   <%= form.text_area :post_id %>
+   <div class="actions">
+    <%= form.submit %>
+   </div>
+  <% end %>

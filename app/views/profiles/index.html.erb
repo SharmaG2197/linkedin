@@ -1,0 +1,59 @@
+<h1 style='margin-left:450px'>Profile</h1>
+<div style='padding:80px'>
+    <% if @profile.nil? %>
+        <%= link_to "Add Profile Detail", new_profile_path %>
+    <% else %>
+        <div class="position-absolute top-50 start-50 translate-middle" >
+            <% if current_user.profile&.image&.attached? %>
+                <%= image_tag current_user.profile.image, {height: 220} %>
+            <% end %>
+        </div>
+
+        <p>Total Post :- <%= current_user.posts.ids.count %> </p>
+        <p> Email :- <%= current_user.email %> </p>
+        <p> Current User :- <%= current_user.id %> </p>
+        <p> Profile ID :- <%= @profile&.id %> </p>
+        <p> Username :- <%= @profile&.username %> </p>
+        <p> User ID :- <%= @profile&.user_id %> </p>
+        <p> Address :- <%= @profile&.address %> </p>
+        <p> Bio :- <%= @profile&.bio %> </p>
+        <p> About :- <%= @profile&.about %> </p>
+        <p> Date of Birth :- <%= @profile&.dob %> </p>
+        <%= link_to "Edit profile", edit_profile_path(current_user) %>
+    <% end %>
+</div>
+
+<% if current_user.posts.count == 0 %>
+    <div class = "position-absolute bottom-0 start-50 translate-middle-x" >
+        <p> Add Post </p> 
+        <div class="btn btn-outline-primary">
+            <%= link_to "Create New post", new_post_path %>
+        </div>
+    </div>
+<% else %>
+    <div style='margin-left:80px'>
+        <h3> Post's </h3>
+        <ol>
+            <% @posts&.each do |post| %>
+                <li> Title :- <%= link_to post.title, post %> </li>
+            <% end %>
+        </ol>
+    </div>
+<% end %>
+
+
+<div style='margin-left:80px'>
+    <h1 style="color:blue"  > Recommendation </h1>
+    <% @users.each do |user| %>
+        <% if current_user == user %>
+            <% next %>
+        <% else %>
+            <%= user.email %> <br>
+        <% end %>
+    <% end %>
+</div>
+
+
+
+
+

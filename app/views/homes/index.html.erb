@@ -1,0 +1,52 @@
+<h1>Posts</h1>
+<div class="btn btn-outline-primary">
+  <%= link_to "Create New post", new_post_path %>
+</div>
+
+
+<h4>Total Post :- <%= current_user.posts.ids.count %> </h4>
+<hr>
+
+<div id="posts">
+  <% @posts.each do |post| %>
+    <%= render post %>
+      <h6>Post ID :- <%= post.id %> </h6>
+      <h6>Title :- <%= post.title %> </h6>
+      <h6>Description :- <%= post.description %> </h6>
+      <h6>User Id :- <%= post.user_id %> </h5>
+      <p>Like :- <%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+      <p>
+        <button class="btn btn-outline-success">
+          <%= link_to "Show this post", post %>
+        </button>
+        <%# if current_user.posts.present? %>
+            <%#= link_to 'Edit', edit_post_path(post) %>
+            <%#= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%# end %>
+
+        <p>
+        <%#= @post.likes.count %>
+        <%#= (@post.likes.count) == 1 ? 'Like' : 'Likes'%>
+      </p>
+      <%# pre_like = @post.likes.find { |like| like.user_id == current_user.id} %>
+      <%# if pre_like %>
+        <%#= button_to 'Unlike', post_like_path(@post, pre_like), method: :delete %>
+      <%# else %>
+        <%#= button_to 'Like', post_likes_path(@post), method: :post %>
+      <%# end %>
+
+
+
+      </p> <hr>
+
+  <% end %>
+</div>
+
+
+<div style='margin-left:420px'>
+  <%= paginate @posts, theme: 'bootstrap-5', pagination_class: "pagination-sm flex-wrap justify-content-center", nav_class: "d-inline-block" %>
+</div>
+
+
+
+<%#= link_to "New Profile", profiles_path %>
