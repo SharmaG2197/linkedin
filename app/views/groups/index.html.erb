@@ -1,0 +1,36 @@
+<div style="padding:70px">
+    <h1> Group Message Box </h1> <b>Current User Email :- <%= current_user.email %> </b>
+
+    <br><br>
+    <%= link_to "Create a Group", new_group_path %>
+    <br><br>
+    <h2>It's Your Group </h2>
+    <% @groups.each do |i| %>
+        <p>
+            <b> Group Name :- </b> <%= i.group_name %>
+            <b> User ID :- </b> <%= i.user_id %> <br> |
+            <%= link_to "View Group", group_path(i) %> | 
+            <%= link_to "Edit Group", edit_group_path(id: i.id) %> | 
+            <%= link_to "Delete Group", group_path(id: i.id), data: {
+                turbo_method: :delete, turbo_confirm: "Are You Sure Delete #{i.group_name} ?" } %> |
+            <%= link_to "Add Members", members_path(id: i.id) %> | 
+
+            <%#= button_to "Delete Group", group_path(id: i.id), method: :delete %>
+        </p>
+    <% end %> <br> <br>
+
+    <h2> Not Your Group </h2>
+    <% @group_list.each do |i| %>
+        <p>
+            <b> Group Name :- </b> <%= i.group_name %>
+            <b> User ID :- </b> <%= i.user_id %> <br> |
+            <%= link_to "View Group", group_path(i) %> | 
+            <%= link_to "Edit Group", edit_group_path(id: i.id) %> | 
+            <%= link_to "Delete Group", group_path(id: i.id), data: {
+                turbo_method: :delete, turbo_confirm: "Are You Sure Delete #{i.group_name} ?" } %> |
+            <%= link_to "Add Members", members_path(id: i.id) %> | 
+
+            <%#= button_to "Delete Group", group_path(id: i.id), method: :delete %>
+        </p>
+    <% end %>
+</div>

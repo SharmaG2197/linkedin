@@ -1,0 +1,12 @@
+<h1> Index Page Member </h1>
+<div style="padding:70px">
+    <b> <%= current_user.email %> </b> <br> <br>
+    <% @users.each do |user| %>
+        <p>
+            <b> User ID :- </b> <%= user.id %> | 
+            <b> Member Name :- </b> <%= user.email %> | 
+            <%= link_to "Add Member", new_member_path(id: user.id, group_id: @group_id) %> | <br>
+        </p>
+    <% end %>
+    <%= link_to "Back To Page", groups_path %>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_11_121721) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_26_125845) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,6 +49,39 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_121721) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "friend_requests", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "friend_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_friend_requests_on_user_id"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "friend_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_friendships_on_user_id"
+  end
+
+  create_table "groupchats", force: :cascade do |t|
+    t.integer "sender_id"
+    t.string "text"
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_groupchats_on_group_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "group_name"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_groups_on_user_id"
+  end
+
   create_table "likes", force: :cascade do |t|
     t.integer "post_id", null: false
     t.integer "user_id", null: false
@@ -56,6 +89,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_121721) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_likes_on_post_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_members_on_group_id"
+    t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "receiver_id"
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "posts", force: :cascade do |t|
@@ -93,6 +143,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_121721) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "friend_requests", "users"
+  add_foreign_key "friendships", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
 end

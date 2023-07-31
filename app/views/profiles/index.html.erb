@@ -21,18 +21,28 @@
         <p> Date of Birth :- <%= @profile&.dob %> </p>
         <%= link_to "Edit profile", edit_profile_path(current_user) %>
     <% end %>
+
+    <br>
+
+    <div class="btn btn-outline-warning" style="margin-top:50px">
+        <%= link_to 'Messanger', messages_path %> 
+    </div> <br>
+    <div class="btn btn-outline-warning" style="margin-top:50px">
+        <%= link_to 'Group Messanger', groups_path %> 
+    </div>
+
 </div>
 
 <% if current_user.posts.count == 0 %>
-    <div class = "position-absolute bottom-0 start-50 translate-middle-x" >
+    <div class="position-absolute bottom-0 start-50 translate-middle-x" >
         <p> Add Post </p> 
-        <div class="btn btn-outline-primary">
+        <div class="btn btn-outline-primary" >
             <%= link_to "Create New post", new_post_path %>
         </div>
     </div>
 <% else %>
-    <div style='margin-left:80px'>
-        <h3> Post's </h3>
+    <div style="margin-left:80px">
+        <h3> Post </h3>
         <ol>
             <% @posts&.each do |post| %>
                 <li> Title :- <%= link_to post.title, post %> </li>
@@ -44,16 +54,44 @@
 
 <div style='margin-left:80px'>
     <h1 style="color:blue"  > Recommendation </h1>
+    <%# byebug %>
     <% @users.each do |user| %>
-        <% if current_user == user %>
+        <% if current_user.id == user.id %>
             <% next %>
         <% else %>
-            <%= user.email %> <br>
+            <%= user.email %>
+            <%= button_to "Follow", friend_requests_path(id: user.id) %>
         <% end %>
     <% end %>
 </div>
+        
+<br>
+
+<% a = 0 %>
+<% @incoming.each do |i| %>
+    <p> Incoming Request :- <% a+=1 %> <%= a %>
+        <b>User ID :- </b> <%= i.user_id %>
+        <b>User Email :- </b> <%= i.user.email %>
+        <%= link_to "Accept Request", update_user_path(id: i.id) %>   
+    </p>
+<% end %>
 
 
+<% a = 0 %>
+<% @outgoing.each do |i| %>
+    <p> Outgoing Request :- <% a+=1 %> <%= a %> 
+        <b>User ID :- </b> <%= i.friend_id %> 
+        <b>User Email :- </b> <%= i.friend.email %>
+        <b> | Request Pending... </b>
+    </p>
+<% end %>
 
-
-
+<br>
+<br>
+<h1>Friend List </h1>
+<% a = 0 %>
+<% @friend_ship.each do |i| %>
+    <%= a += 1 %>. <%= i.friend.email %>
+    <%= link_to "Unfollow", friends_destroy_path(id: i.id), method: :delete %>
+    <br>
+<% end %>

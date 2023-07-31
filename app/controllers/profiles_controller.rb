@@ -3,7 +3,12 @@ class ProfilesController < ApplicationController
 
   def index
     @posts = current_user.posts.order(:title).page params[:page]
-    @users = User.all
+    # ids = current_user.friend_requests.pluck(:friend_id)
+    ids = current_user.friendships.pluck(:friend_id)
+    @users = User.where.not(id: [ids])
+    @incoming = FriendRequest.where(friend: current_user)
+    @outgoing = current_user.friend_requests
+    @friend_ship = current_user.friendships.all
   end
 
   def show

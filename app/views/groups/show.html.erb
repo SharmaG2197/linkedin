@@ -1,0 +1,30 @@
+<div style="padding:70px">
+    <h3> Group Name :- <%= @group.group_name %> </h3>
+    <h5 style="margin-left:100px"> Group Admin :- <%= @group_admin.email %> </h5>
+    <h6> <%= link_to "Back To Page", groups_path %> </h6>
+
+    <% @members.each do |i| %>
+        <%= i.id %>.
+        <%= i.email %> <br>
+    <% end %> <br>
+    
+    <h3> Messages :- <%= current_user.email %> </h3>
+
+    <% @groupchat.each do |i| %>
+        <b> <%= i.member.email %> :- </b> <%= i.text %> <br>
+    <% end %>
+    <br>
+
+    <p> <b> Add Your Message :- </b> </p>
+
+    <div style="margin-left:70px">
+        <%= form_tag groupchats_path  do %>
+            <div>
+                <%= text_field_tag :text, nil, placeholder: 'Type here...',class: 'form-control' %>
+                <%= hidden_field_tag "group_id", @group.id %>
+                <%= hidden_field_tag "sender_id", @sender.id %>
+                <%= submit_tag "Send", data: { disable_with: false } %>
+            </div>
+        <% end %>
+    </div>
+</div>
