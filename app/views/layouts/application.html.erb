@@ -12,63 +12,63 @@
 
   <body>
 
-    <div id="user_nav">
-      <% if user_signed_in? %>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-          <div class="container-fluid">
-            <a style='color:blue' class="navbar-brand fw-bold" href="#">Linkedin</a>
-            <div class="collapse navbar-collapse container-fluid">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <div class="nav-link active">
-                    <%= link_to "Home", posts_path %>
-                  </div> 
-                </li>
-                <li class="nav-item">
-                  <div class="nav-link active">
-                    <%= link_to "Profile", profiles_path %>
+    <div style="padding: 1%;">
+      <div id="user_nav">
+        <% if user_signed_in? %>
+          <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <a style='color:blue' class="navbar-brand fw-bold" href="#">Linkedin</a>
+              <div class="collapse navbar-collapse container-fluid">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <div class="nav-link active">
+                      <%= link_to "Home", posts_path %>
+                    </div> 
+                  </li>
+                  <li class="nav-item">
+                    <div class="nav-link active">
+                      <%= link_to "Profile", profiles_path %>
+                    </div>
+                  </li>
+                </ul>            
+                <form class="d-flex" role="search">
+                  <div style='margin-left:480px' class="me-2">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                   </div>
-                </li>
-              </ul>            
-              <form class="d-flex" role="search">
-                <div style='margin-left:480px' class="me-2">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                </div>
-                <div>
-                  <button class="btn btn-outline-success me-2" type="submit">Search</button>
-                </div>
-                <div class="btn btn-outline-primary">
-                    <%= link_to 'Sign out', destroy_user_session_path %>
-                </div>
-              </form>
+                  <div>
+                    <button class="btn btn-outline-success me-2" type="submit">Search</button>
+                  </div>
+                  <div class="btn btn-outline-primary">
+                      <%= link_to 'Sign out', destroy_user_session_path %>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
-        </nav>
+          </nav>
 
-      <% else %>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-          <div class="container-fluid">
-            <a style='color:blue' class="navbar-brand fw-bold" href="#">Linkedin</a>
-            <div class="collapse navbar-collapse">
-              <form class="d-flex" style='margin-left:980px' role="search">
-                <div class="btn btn-outline-primary">
-                  <%= link_to 'Register', new_user_registration_path %>
-                </div>
-                <div class="btn btn-outline-primary" style='margin-left:10px'>
-                  <%= link_to 'Sign in', new_user_session_path %>
-                </div>
-              </form>
+        <% else %>
+          <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <a style='color:blue' class="navbar-brand fw-bold" href="#">Linkedin</a>
+              <div class="collapse navbar-collapse">
+                <form class="d-flex" style='margin-left:980px' role="search">
+                  <div class="btn btn-outline-primary">
+                    <%= link_to 'Register', new_user_registration_path %>
+                  </div>
+                  <div class="btn btn-outline-primary" style='margin-left:10px'>
+                    <%= link_to 'Sign in', new_user_session_path %>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
-        </nav>
-      <% end %>
+          </nav>
+        <% end %>
+      </div>
+
+      <% if notice %> <p class="alert alert-success"> <%= notice %> </p> <% end %>
+      <% if alert %> <p class="alert alert-danger"> <%= alert %> </p> <% end %>
+
+      <%= yield %>
     </div>
-
-    <% if notice %> <p class="alert alert-success"> <%= notice %> </p> <% end %>
-    <% if alert %> <p class="alert alert-danger"> <%= alert %> </p> <% end %>
-
-    <%= yield %>
-    
-    
   </body>
 </html>

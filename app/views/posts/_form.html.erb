@@ -1,25 +1,26 @@
-<%= form_with model: @post do |form| %>
+<%= form_with(model: @post) do |form| %>
+
   <div>
     <%= form.label :title %>
-    <%= form.text_field :title %> <br> <br>
+    <%= form.text_field :title, class: 'form-control' %> <br> <br>
     <% @post.errors.full_messages_for(:title).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
+      <div class="alert alert-danger" role="alert"><%= message %></div> <% end %>
   </div>
 
   <div>
     <%= form.label :description %>
-    <%= form.text_field :description %> <br> <br>
+    <%= form.text_area :description, rows: 5, class: 'form-control' %> <br> <br>
     <% @post.errors.full_messages_for(:description).each do |message| %>
-      <div><%= message %></div>
+      <div class="alert alert-danger" role="alert"><%= message %></div>
+    <% end %>
   </div>
 
   <div>
-    <%= form.hidden_field :user_id %> <br> <br>
+    <%= form.hidden_field :user_id, value: current_user.id %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Create Post", class: 'btn btn-primary' %>
   </div>
 
 <% end %>
