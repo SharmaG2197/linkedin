@@ -1,4 +1,13 @@
 class User < ApplicationRecord
+
+  def self.ransackable_associations(auth_object = nil)
+    ["comments", "friend_requests", "friends", "friendships", "group_owners", "groups", "likes", "members", "messaged", "messagee", "pending_friends", "posts", "profile", "receivers", "senders"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "email", "encrypted_password", "id", "remember_created_at", "reset_password_sent_at", "reset_password_token", "updated_at"]
+  end
+
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   has_many :posts
@@ -12,7 +21,7 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
 
-  has_many :messagee, foreign_key: :receiver_id, class_name: 'Message'  
+  has_many :messagee, foreign_key: :receiver_id, class_name: 'Message'
   has_many :senders, through: :messagee
   has_many :messaged, foreign_key: :sender_id, class_name: 'Message'
   has_many :receivers, through: :messaged

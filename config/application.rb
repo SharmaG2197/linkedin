@@ -18,5 +18,8 @@ module Demoapp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Assets precompile configuration
+    config.assets.precompile += %w( admin.js admin.css )
   end
 end
