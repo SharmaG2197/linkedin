@@ -83,3 +83,4 @@ gem 'bootstrap5-kaminari-views'
 
 gem 'activestorage'
 gem 'activeadmin'
+gem 'pg'
